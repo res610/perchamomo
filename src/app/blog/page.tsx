@@ -4,9 +4,21 @@ import Footer from '@/components/Footer';
 import { AMEBA_BLOG_URL } from '@/constants';
 import blogData from '@/data/blog.json';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
 export const metadata: Metadata = {
     title: 'ブログ',
     description: 'Percha Momoのブログ記事一覧。ネイルデザインやサロンの最新情報をお届けします。',
+    alternates: { canonical: '/blog/' },
+};
+
+const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        { "@type": "ListItem", position: 1, name: "ホーム", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: "ブログ", item: `${siteUrl}/blog/` },
+    ],
 };
 
 interface BlogPost {
@@ -21,6 +33,10 @@ export default function BlogPage() {
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
             <Header />
             <main className="min-h-screen">
                 <div className="max-w-4xl mx-auto px-4 py-12">

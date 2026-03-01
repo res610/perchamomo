@@ -2,9 +2,12 @@ import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
 export const metadata: Metadata = {
     title: 'メニュー・料金',
     description: 'Percha Momoのメニュー・料金一覧。ジェルネイル、ネイルケアなど各種メニューをご用意しております。',
+    alternates: { canonical: '/menu/' },
 };
 
 // TODO: Wixサイトから実際のメニュー・料金を取得して更新
@@ -34,9 +37,47 @@ const menuCategories = [
     },
 ];
 
+const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        { "@type": "ListItem", position: 1, name: "ホーム", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: "メニュー・料金", item: `${siteUrl}/menu/` },
+    ],
+};
+
+const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Percha Momo ネイルメニュー",
+    itemListElement: menuCategories.flatMap((category, catIdx) =>
+        category.items.map((item, itemIdx) => ({
+            "@type": "ListItem",
+            position: catIdx * 10 + itemIdx + 1,
+            item: {
+                "@type": "Service",
+                name: `${item.name}（${category.name}）`,
+                description: item.description,
+                provider: {
+                    "@type": "NailSalon",
+                    name: "Percha Momo",
+                },
+            },
+        }))
+    ),
+};
+
 export default function MenuPage() {
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+            />
             <Header />
             <main className="min-h-screen">
                 <div className="max-w-4xl mx-auto px-4 py-12">

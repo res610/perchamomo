@@ -1,75 +1,37 @@
-'use client';
-
-import { useState } from 'react';
-import Image from 'next/image';
+import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import ImageModal from '@/components/ImageModal';
+import GalleryContent from '@/components/GalleryContent';
 
-// TODO: Wixサイトからネイル画像をダウンロードして public/images/gallery/ に配置
-// 以下はプレースホルダー
-const galleryImages = [
-    { src: '', alt: 'ネイルデザイン 1' },
-    { src: '', alt: 'ネイルデザイン 2' },
-    { src: '', alt: 'ネイルデザイン 3' },
-    { src: '', alt: 'ネイルデザイン 4' },
-    { src: '', alt: 'ネイルデザイン 5' },
-    { src: '', alt: 'ネイルデザイン 6' },
-    { src: '', alt: 'ネイルデザイン 7' },
-    { src: '', alt: 'ネイルデザイン 8' },
-    { src: '', alt: 'ネイルデザイン 9' },
-];
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+export const metadata: Metadata = {
+    title: 'ネイルギャラリー',
+    description: 'Percha Momoのネイルデザインギャラリー。ジェルネイル、フレンチ、アートなど施術例をご覧いただけます。',
+    alternates: { canonical: '/gallery/' },
+};
+
+const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        { "@type": "ListItem", position: 1, name: "ホーム", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: "ネイルギャラリー", item: `${siteUrl}/gallery/` },
+    ],
+};
 
 export default function GalleryPage() {
-    const [modalImage, setModalImage] = useState<{ src: string; alt: string } | null>(null);
-
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
             <Header />
             <main className="min-h-screen">
-                <div className="max-w-6xl mx-auto px-4 py-12">
-                    <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">
-                        ネイルギャラリー
-                    </h1>
-                    <p className="text-center text-gray-500 mb-12">
-                        施術例をご覧ください
-                    </p>
-
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        {galleryImages.map((image, index) => (
-                            <button
-                                key={index}
-                                onClick={() => image.src && setModalImage(image)}
-                                className="aspect-square relative rounded-xl overflow-hidden bg-gray-100 hover:opacity-90 transition-opacity"
-                            >
-                                {image.src ? (
-                                    <Image
-                                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}${image.src}`}
-                                        alt={image.alt}
-                                        fill
-                                        className="object-cover"
-                                        sizes="(max-width: 768px) 50vw, 33vw"
-                                        loading="lazy"
-                                    />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center">
-                                        <p className="text-gray-400 text-sm">{image.alt}</p>
-                                    </div>
-                                )}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+                <GalleryContent />
             </main>
             <Footer />
-
-            {modalImage && (
-                <ImageModal
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH}${modalImage.src}`}
-                    alt={modalImage.alt}
-                    onClose={() => setModalImage(null)}
-                />
-            )}
         </>
     );
 }
