@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { STORE_LATITUDE, STORE_LONGITUDE, SALON_NAME, SALON_NAME_FULL, STORE_INFO, LINE_URL, INSTAGRAM_URL } from "@/constants";
+import { STORE_LATITUDE, STORE_LONGITUDE, SALON_NAME, SALON_NAME_FULL, STORE_INFO, LINE_URL, INSTAGRAM_URL, AMEBA_BLOG_URL } from "@/constants";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
@@ -11,14 +11,18 @@ export const metadata: Metadata = {
         default: `${SALON_NAME_FULL}`,
         template: `%s | ${SALON_NAME}`,
     },
-    description: `${SALON_NAME}は丁寧な施術とこだわりのデザインでお客様の指先を美しく彩るネイルサロンです。ジェルネイル、スカルプチュア、ケアメニューなど幅広く対応いたします。`,
+    description: "沖縄県八重瀬町の完全予約制プライベートネイルサロン percha MOMO。自爪育成・深爪ケア・ジェルネイルなど、メディカルネイルプランナーの資格を持つネイリストが丁寧に施術いたします。",
     keywords: [
         "ネイルサロン",
+        "八重瀬町 ネイルサロン",
+        "沖縄 ネイルサロン",
+        "自爪育成",
+        "深爪 ケア",
         "ジェルネイル",
-        "ネイルデザイン",
-        "ネイルケア",
-        "Percha Momo",
-        // TODO: 地域確定後に地域キーワードを追加（例: "○○区 ネイルサロン"）
+        "プライベートサロン",
+        "percha MOMO",
+        "ペルチェ モモ",
+        "メディカルネイルプランナー",
     ],
     authors: [{ name: SALON_NAME }],
     creator: SALON_NAME,
@@ -34,7 +38,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: SALON_NAME_FULL,
-        description: `${SALON_NAME}は丁寧な施術とこだわりのデザインでお客様の指先を美しく彩るネイルサロンです。`,
+        description: "沖縄県八重瀬町の完全予約制プライベートネイルサロン。自爪育成・深爪ケア・ジェルネイルを丁寧に施術。",
         url: siteUrl,
         siteName: SALON_NAME_FULL,
         images: [
@@ -51,7 +55,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: SALON_NAME_FULL,
-        description: `${SALON_NAME}は丁寧な施術とこだわりのデザインでお客様の指先を美しく彩るネイルサロンです。`,
+        description: "沖縄県八重瀬町の完全予約制プライベートネイルサロン。自爪育成・深爪ケア・ジェルネイルを丁寧に施術。",
     },
     robots: {
         index: true,
@@ -81,9 +85,8 @@ const jsonLd = {
     "@context": "https://schema.org",
     "@type": "NailSalon",
     name: SALON_NAME,
-    // TODO: GBP登録名が確定したら alternateName に追加
-    // alternateName: ["GBP登録名"],
-    description: `${SALON_NAME}は丁寧な施術とこだわりのデザインでお客様の指先を美しく彩るネイルサロンです。`,
+    alternateName: ["percha MOMO", "ペルチェ モモ", "ペルチェモモ"],
+    description: "沖縄県八重瀬町の完全予約制プライベートネイルサロン。自爪育成・深爪ケア・ジェルネイルなど、メディカルネイルプランナーの資格を持つネイリストが丁寧に施術いたします。",
     url: siteUrl,
     telephone: STORE_INFO.phone,
     image: `${siteUrl}/images/og-image.png`,
@@ -96,10 +99,9 @@ const jsonLd = {
     address: {
         "@type": "PostalAddress",
         streetAddress: STORE_INFO.address,
-        // TODO: 地域確定後に追加
-        // addressLocality: "○○区",
-        // addressRegion: "○○県",
-        // postalCode: "000-0000",
+        addressLocality: "八重瀬町",
+        addressRegion: "沖縄県",
+        postalCode: "901-0504",
         addressCountry: "JP",
     },
     geo: {
@@ -107,21 +109,24 @@ const jsonLd = {
         latitude: STORE_LATITUDE,
         longitude: STORE_LONGITUDE,
     },
-    // TODO: 地域確定後に追加
-    // areaServed: [
-    //     { "@type": "City", name: "○○市" },
-    //     { "@type": "State", name: "○○県" },
-    // ],
+    areaServed: [
+        { "@type": "City", name: "八重瀬町" },
+        { "@type": "City", name: "豊見城市" },
+        { "@type": "City", name: "糸満市" },
+        { "@type": "City", name: "那覇市" },
+        { "@type": "State", name: "沖縄県" },
+    ],
     priceRange: "¥¥",
     openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
         opens: "10:00",
-        closes: "19:00",
+        closes: "18:00",
     },
     sameAs: [
         LINE_URL,
         INSTAGRAM_URL,
+        AMEBA_BLOG_URL,
     ],
     hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -131,16 +136,16 @@ const jsonLd = {
                 "@type": "Offer",
                 itemOffered: {
                     "@type": "Service",
-                    name: "ジェルネイル",
-                    description: "豊富なカラーとデザインのジェルネイル",
+                    name: "自爪育成ジェルネイル",
+                    description: "自爪育成技法を用いたジェルネイル。フィルイン導入で爪へのダメージを抑えた施術",
                 },
             },
             {
                 "@type": "Offer",
                 itemOffered: {
                     "@type": "Service",
-                    name: "ネイルケア",
-                    description: "爪の健康を保つケアメニュー",
+                    name: "深爪・トラブル爪ケア",
+                    description: "深爪、噛み癖、むしり癖、トラブル爪に対応。メディカルネイルプランナーの知識で丁寧にケア",
                 },
             },
         ],

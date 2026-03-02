@@ -1,34 +1,37 @@
 // サロン名
-export const SALON_NAME = 'Percha Momo';
-export const SALON_NAME_FULL = 'Percha Momo ネイルサロン';
+export const SALON_NAME = 'percha MOMO';
+export const SALON_NAME_FULL = 'percha MOMO（ペルチェ モモ）| 沖縄県八重瀬町 プライベートネイルサロン';
+export const SALON_NAME_SHORT = 'percha MOMO';
+export const SALON_SUBTITLE = 'private salon';
 
-// TODO: Wixサイトから実際の住所・座標を取得して更新
-// 店舗座標情報（仮の値 - 実際の住所に合わせて更新してください）
-export const STORE_LATITUDE = 35.6762;
-export const STORE_LONGITUDE = 139.6503;
+// 店舗座標情報（Google Maps embeddedより取得）
+export const STORE_LATITUDE = 26.14502732169835;
+export const STORE_LONGITUDE = 127.7325836888037;
 export const MAP_ZOOM_LEVEL = 15;
 
-// TODO: 実際の情報に更新
 // 店舗情報
 export const STORE_INFO = {
-    postalCode: '〒000-0000',
-    address: '東京都○○区○○ 0-0-0',
-    building: '',
-    phone: '000-0000-0000',
-    openingHours: '10:00〜19:00',
-    closedDay: '不定休',
+    postalCode: '〒901-0504',
+    address: '沖縄県島尻郡八重瀬町字後原',
+    building: '', // プライベートサロンのため詳細非公開
+    phone: '', // LINEに一本化
+    openingHours: '10:00〜（最終受付14:00）',
+    closedDay: '日曜日（完全予約制）',
+    parking: '1台分完備',
+    payment: '各種クレジット対応',
+    addressNote: '※詳しい場所はご予約時にお伝えします',
 };
 
 // SNS
-export const LINE_URL = 'https://line.me/R/ti/p/TODO'; // TODO: LINE URLを設定
-export const INSTAGRAM_URL = 'https://www.instagram.com/perchamomo/'; // TODO: 正しいURLに更新
-export const AMEBA_BLOG_URL = 'https://ameblo.jp/TODO/'; // TODO: Ameba Blog URLを設定
-export const AMEBA_RSS_URL = 'https://rssblog.ameba.jp/TODO/rss.html'; // TODO: RSS URLを設定
+export const LINE_URL = 'https://line.me/R/ti/p/@879ohpiy';
+export const INSTAGRAM_URL = 'https://www.instagram.com/perchamomo/'; // TODO: オーナーと確認後に正しいURLに更新
+export const AMEBA_BLOG_URL = 'https://ameblo.jp/perchamomo/';
+export const AMEBA_RSS_URL = 'https://rssblog.ameba.jp/perchamomo/rss.html';
 
 // Instagram
 export const INSTAGRAM_POST_COUNT = 9;
 
-// ブランドカラー
+// ブランドカラー（Wixサイトのブラウン・ゴールド系に合わせて調整）
 export const BRAND_COLOR = '#e8b4b8';
 export const BRAND_COLOR_LIGHT = '#f5d5d8';
 export const BRAND_COLOR_DARK = '#c4878c';

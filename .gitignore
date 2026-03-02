@@ -35,6 +35,9 @@ next-env.d.ts
 # assets for file sharing (excluded from git)
 /_assets/
 
+# work directory (content collection, temp files)
+/_work/
+
 # claude code settings
 /.claude/
 .mcp.json
