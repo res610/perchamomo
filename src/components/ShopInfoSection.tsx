@@ -18,13 +18,21 @@ export default function ShopInfoSection() {
                                         {STORE_INFO.postalCode}<br />
                                         {STORE_INFO.address}
                                         {STORE_INFO.building && <><br />{STORE_INFO.building}</>}
+                                        {STORE_INFO.addressNote && (
+                                            <span className="block text-xs text-gray-500 mt-1">{STORE_INFO.addressNote}</span>
+                                        )}
                                     </td>
                                 </tr>
                                 <tr className="border-b">
-                                    <th className="py-3 pr-4 text-left text-gray-500 font-normal">電話番号</th>
+                                    <th className="py-3 pr-4 text-left text-gray-500 font-normal">予約</th>
                                     <td className="py-3 text-gray-800">
-                                        <a href={`tel:${STORE_INFO.phone.replace(/-/g, '')}`} className="text-brand-dark hover:underline">
-                                            {STORE_INFO.phone}
+                                        <a
+                                            href={LINE_URL}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-brand-dark hover:underline"
+                                        >
+                                            LINE予約
                                         </a>
                                     </td>
                                 </tr>
@@ -35,6 +43,14 @@ export default function ShopInfoSection() {
                                 <tr className="border-b">
                                     <th className="py-3 pr-4 text-left text-gray-500 font-normal">定休日</th>
                                     <td className="py-3 text-gray-800">{STORE_INFO.closedDay}</td>
+                                </tr>
+                                <tr className="border-b">
+                                    <th className="py-3 pr-4 text-left text-gray-500 font-normal">駐車場</th>
+                                    <td className="py-3 text-gray-800">{STORE_INFO.parking}</td>
+                                </tr>
+                                <tr className="border-b">
+                                    <th className="py-3 pr-4 text-left text-gray-500 font-normal">支払方法</th>
+                                    <td className="py-3 text-gray-800">{STORE_INFO.payment}</td>
                                 </tr>
                             </tbody>
                         </table>
