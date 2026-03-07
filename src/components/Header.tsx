@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { SALON_NAME } from '@/constants';
@@ -19,8 +20,14 @@ export default function Header() {
         <header className="bg-white shadow-sm sticky top-0 z-50">
             <nav className="max-w-7xl mx-auto px-4 py-4">
                 <div className="flex justify-between items-center">
-                    <Link href="/" className="flex items-center">
-                        {/* TODO: ロゴ画像に差し替え */}
+                    <Link href="/" className="flex items-center gap-2">
+                        <Image
+                            src="/images/logo.webp"
+                            alt={SALON_NAME}
+                            width={40}
+                            height={40}
+                            className="w-10 h-10"
+                        />
                         <span className="text-xl md:text-2xl font-bold text-brand-dark">
                             {SALON_NAME}
                         </span>
