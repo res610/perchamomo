@@ -24,7 +24,7 @@ export const STORE_INFO = {
 
 // SNS
 export const LINE_URL = 'https://line.me/R/ti/p/@879ohpiy';
-export const INSTAGRAM_URL = 'https://www.instagram.com/perchamomo/'; // TODO: オーナーと確認後に正しいURLに更新
+export const INSTAGRAM_URL = 'https://www.instagram.com/nail.salon_percha_momo/';
 export const AMEBA_BLOG_URL = 'https://ameblo.jp/perchamomo/';
 export const AMEBA_RSS_URL = 'https://rssblog.ameba.jp/perchamomo/rss.html';
 
