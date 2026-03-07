@@ -24,13 +24,18 @@ export default function Header() {
                         <Image
                             src="/images/logo.webp"
                             alt={SALON_NAME}
-                            width={40}
-                            height={40}
-                            className="w-10 h-10"
+                            width={48}
+                            height={48}
+                            className="w-11 h-11 md:w-12 md:h-12"
                         />
-                        <span className="text-xl md:text-2xl font-bold text-brand-dark">
-                            {SALON_NAME}
-                        </span>
+                        <div className="flex flex-col leading-tight">
+                            <span className="text-[10px] md:text-xs tracking-wider text-gray-500">
+                                private salon
+                            </span>
+                            <span className="text-lg md:text-xl font-bold text-brand-dark tracking-wide">
+                                percha MOMO
+                            </span>
+                        </div>
                     </Link>
 
                     {/* Desktop Navigation */}
