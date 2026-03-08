@@ -2,18 +2,21 @@ import Image from 'next/image';
 
 export default function HeroSection() {
     return (
-        <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+        <section className="relative h-[50vh] md:h-[80vh] overflow-hidden">
             <Image
                 src="/images/hero.webp"
                 alt="施術風景"
                 fill
-                className="object-cover"
+                className="object-cover object-[30%_center] md:object-center"
                 priority
             />
             <div className="absolute inset-0 bg-black/40" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                <p className="text-sm md:text-base tracking-widest text-white/90 mb-1">
+                    沖縄県 島尻郡八重瀬町後原
+                </p>
                 <p className="text-sm md:text-base tracking-widest text-white/90 mb-3">
-                    沖縄県 島尻郡八重瀬町後原 完全予約制プライベートネイルサロン
+                    完全予約制プライベートネイルサロン
                 </p>
                 <h1 className="text-3xl md:text-5xl font-bold text-white tracking-wide">
                     percha MOMO
