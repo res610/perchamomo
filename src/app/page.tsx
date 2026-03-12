@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
+import LatestNews from '@/components/LatestNews';
 import AboutSection from '@/components/AboutSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import SalonCommitmentSection from '@/components/SalonCommitmentSection';
@@ -14,6 +15,7 @@ export default function Home() {
             <Header />
             <main>
                 <HeroSection />
+                <LatestNews />
                 <AboutSection />
                 <FeaturesSection />
                 <SalonCommitmentSection />
