@@ -1,11 +1,10 @@
 name: Fetch Instagram Posts
 
 on:
-    # TODO: Instagram設定完了後にscheduleを有効化する
-    # schedule:
-    #     # Run daily at 09:00 JST (00:00 UTC)
-    #     - cron: '0 0 * * *'
-    workflow_dispatch: # Allow manual trigger (Instagram設定完了後のテスト用)
+    schedule:
+        # Run daily at 09:00 JST (00:00 UTC)
+        - cron: '0 0 * * *'
+    workflow_dispatch:
 
 permissions:
     contents: write
@@ -26,9 +25,29 @@ jobs:
               with:
                   node-version: '20'
 
-            - name: Fetch Instagram posts
+            - name: Refresh Instagram token
               env:
                   INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+                  GH_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
+              run: |
+                  # Refresh long-lived token (valid for 60 days from refresh)
+                  # Token must be at least 24 hours old to refresh
+                  RESPONSE=$(curl -s "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${INSTAGRAM_ACCESS_TOKEN}")
+                  NEW_TOKEN=$(echo "$RESPONSE" | jq -r '.access_token // empty')
+                  if [ -n "$NEW_TOKEN" ]; then
+                      echo "Token refreshed successfully."
+                      # Update GitHub Secret with new token
+                      gh secret set INSTAGRAM_ACCESS_TOKEN --body "$NEW_TOKEN"
+                      echo "INSTAGRAM_ACCESS_TOKEN=$NEW_TOKEN" >> "$GITHUB_ENV"
+                  else
+                      echo "Token refresh skipped or failed (may be less than 24h old): $RESPONSE"
+                      echo "Using existing token."
+                      echo "INSTAGRAM_ACCESS_TOKEN=${INSTAGRAM_ACCESS_TOKEN}" >> "$GITHUB_ENV"
+                  fi
+
+            - name: Fetch Instagram posts
+              env:
+                  INSTAGRAM_ACCESS_TOKEN: ${{ env.INSTAGRAM_ACCESS_TOKEN }}
                   INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
               run: node scripts/fetch-instagram.mjs
 

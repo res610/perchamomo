@@ -1,0 +1,47 @@
+name: Fetch Blog Posts
+
+on:
+    schedule:
+        # Run daily at 10:00 JST (01:00 UTC)
+        - cron: '0 1 * * *'
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+concurrency:
+    group: "blog-fetch"
+    cancel-in-progress: true
+
+jobs:
+    fetch:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+
+            - name: Fetch blog posts
+              run: node scripts/fetch-blog.mjs
+
+            - name: Check for changes
+              id: changes
+              run: |
+                  git add src/data/blog.json
+                  if git diff --cached --quiet; then
+                      echo "changed=false" >> "$GITHUB_OUTPUT"
+                  else
+                      echo "changed=true" >> "$GITHUB_OUTPUT"
+                  fi
+
+            - name: Commit and push
+              if: steps.changes.outputs.changed == 'true'
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git commit -m "chore: update blog feed data"
+                  git push

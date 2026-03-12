@@ -17,7 +17,7 @@ const POST_COUNT = 9;
 const IMAGE_DIR = 'public/images/instagram';
 const JSON_PATH = 'src/data/instagram.json';
 const API_VERSION = 'v21.0';
-const API_BASE = `https://graph.facebook.com/${API_VERSION}`;
+const API_BASE = `https://graph.instagram.com/${API_VERSION}`;
 const FIELDS = 'id,caption,media_type,media_url,thumbnail_url,permalink,timestamp';
 
 // --- Main ---
