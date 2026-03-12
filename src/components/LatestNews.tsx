@@ -13,8 +13,8 @@ export default function LatestNews() {
     const date = new Date(latest.pubDate).toLocaleDateString('ja-JP');
 
     return (
-        <div className="bg-brand-light/40 border-b border-brand/30">
-            <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3 text-sm">
+        <div className="bg-brand-light/40 border-y border-brand/30 my-4">
+            <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-3 text-sm min-w-0">
                 <span className="shrink-0 bg-brand-dark text-white text-xs font-bold px-2 py-0.5 rounded">
                     NEW
                 </span>

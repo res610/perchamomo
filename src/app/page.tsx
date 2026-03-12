@@ -15,6 +15,7 @@ export default function Home() {
             <Header />
             <main>
                 <HeroSection />
+                <div className="h-4" />
                 <LatestNews />
                 <AboutSection />
                 <FeaturesSection />
